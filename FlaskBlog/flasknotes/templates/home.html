@@ -1,0 +1,23 @@
+{% extends "layout.html" %} {% block content %}
+<h1>
+  Welcome to the
+  <span id="element" style="color: violet; font-size: 10rem"></span>
+</h1>
+{% if current_user.is_authenticated %}
+<form action="/home" method="POST">
+  {{ form.hidden_tag() }} {{form.title.label(class="")}}
+  {{form.title(class="",placeholder="title", value="default")}}
+  {{form.date_note.label(class="")}} {{form.date_note(class="")}}
+  {{form.content.label()}} {{form.content()}} {{form.submit()}}
+</form>
+{%else%}
+<h1>Please login to add post or see other people post.</h1>
+
+{%endif%}
+<script>
+  var typed = new Typed("#element", {
+    strings: ["The Blog!", "Hello World!", "The Blog!", "Ganesh Blogs!"],
+    typeSpeed: 100,
+  });
+</script>
+{% endblock content %}

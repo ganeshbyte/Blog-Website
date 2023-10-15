@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='CSS/main.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='CSS/style.css') }}"
+    />
+
+    {% if title %}
+    <title>Flask Notes - {{ title }}</title>
+    {% else %}
+    <title>Flask Notes</title>
+    {% endif %}
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="left">Ganesh Blog</div>
+        <div class="right">
+          <ul>
+            <li><a href="{{url_for('home')}}">Home</a></li>
+
+            {% if current_user.is_authenticated %}
+            <li><a href="{{url_for('mypost')}}">Posts</a></li>
+            <li>
+              <a class="nav-item nav-link" href="{{ url_for('account') }}"
+                >Account</a
+              >
+            </li>
+            <li>
+              <a class="nav-item nav-link" href="{{ url_for('auth.logout') }}"
+                >Logout</a
+              >
+            </li>
+            {% else %}
+            <li>
+              <a class="nav-item nav-link" href="{{ url_for('auth.login') }}"
+                >Login</a
+              >
+            </li>
+            <li>
+              <a class="nav-item nav-link" href="{{ url_for('auth.register') }}"
+                >Register</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <div class="message">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+
+      <div id="flash-message" class="flash-message">{{message}}</div>
+
+      {% endfor %} {% endif %} {% endwith %}
+    </div>
+    {% block content %}{% endblock %}
+
+    <script>
+      function hideFlashMessage() {
+        var flashMessage = document.getElementById("flash-message");
+        if (flashMessage) {
+          flashMessage.style.display = "none"; // You can also use 'visibility: hidden;' or 'remove()' method
+        }
+      }
+
+      // Set the timeout for hiding the flash message
+      window.onload = function () {
+        setTimeout(hideFlashMessage, 5000); // 5000 milliseconds (5 seconds)
+      };
+    </script>
+  </body>
+</html>

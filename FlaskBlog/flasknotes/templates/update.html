@@ -1,0 +1,9 @@
+{% extends "layout.html" %} {% block content %}
+<h1 class="red">Update Page</h1>
+<form action="{{ url_for('update', post_id = postId)}}" method="PUT">
+  {{ form.hidden_tag() }} {{form.title.label(class="")}}
+  {{form.title(class="",placeholder="title", value="default")}}
+  {{form.date_note.label(class="")}} {{form.date_note(class="")}}
+  {{form.content.label()}} {{form.content()}} {{form.submit()}}
+</form>
+{% endblock content %}

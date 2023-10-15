@@ -1,0 +1,18 @@
+{% extends "layout.html" %} {% block content %}
+<div class="form-container">
+  <h1>Log In</h1>
+  <form method="POST" action="{{url_for('auth.login')}}">
+    <div>
+      {{ form.hidden_tag() }} 
+    <div>{{ form.email.label(class="") }} {{ form.email(class="")}}</div>
+    <div>{{form.password.label(class="") }} {{ form.password(class="") }}</div>
+    <div>{{ form.submit() }}</div>
+  </form>
+</div>
+<div class="border-top pt-3">
+  <small class="text-muted">
+    Register yourself?
+    <a class="ml-2" href="{{ url_for('auth.register') }}">Sign In</a>
+  </small>
+</div>
+{% endblock content %}

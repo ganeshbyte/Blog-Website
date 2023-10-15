@@ -1,0 +1,24 @@
+{% extends "layout.html" %} {% block content %}
+<div class="">
+  <h1>Join Today</h1>
+  <form method="POST" action="{{url_for('auth.register')}}">
+    <div>
+      {{ form.hidden_tag() }} {{ form.username.label(class="") }} {{
+      form.username(class="") }}
+    </div>
+    <div>{{ form.email.label(class="") }} {{ form.email(class="")}}</div>
+    <div>{{form.password.label(class="") }} {{ form.password(class="") }}</div>
+    <div>
+      {{ form.confirm_password.label(class="") }} {{
+      form.confirm_password(class="") }}
+    </div>
+    <div>{{ form.submit() }}</div>
+  </form>
+</div>
+<div>
+  <small>
+    Already Have An Account?
+    <a class="" href="{{ url_for('auth.login') }}">Sign In</a>
+  </small>
+</div>
+{% endblock content %}
